@@ -268,6 +268,49 @@ func EvenFirstOddNext(head *LL[int]) (*LL[int], error) {
 	return evenHead, nil
 }
 
+func ReverseLL[T any](head *LL[T]) (*LL[T], error) {
+	if head == nil {
+		return nil, fmt.Errorf("cannot reverse an empty list")
+	}
+
+	var prev *LL[T]
+	curr := head
+
+	for curr != nil {
+		next := curr.Next
+		curr.Next = prev
+		prev = curr
+		curr = next
+	}
+
+	return prev, nil
+}
+
+func SecondHalfReverse[T any](list *LL[T]) (*LL[T], error) {
+	if list == nil {
+		return nil, fmt.Errorf("cannot reverse second half of an empty list")
+	}
+
+	size := Size(list)
+	mid := size / 2
+
+	first := list
+	for i := 1; i < mid; i++ {
+		first = first.Next
+	}
+
+	second := first.Next
+
+	reversed, err := ReverseLL(second)
+	if err != nil {
+		return nil, err
+	}
+
+	first.Next = reversed
+
+	return list, nil
+}
+
 // func main() {
 // 	// implementing ll in go
 

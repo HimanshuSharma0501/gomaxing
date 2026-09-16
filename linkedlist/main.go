@@ -46,4 +46,11 @@ func main() {
 	}
 	ll.PrintLL(list)
 
+	fmt.Println("Reversing the second half of list")
+	list, err = ll.SecondHalfReverse(list)
+	if err != nil {
+		log.Fatal(err)
+	}
+	ll.PrintLL(list)
+
 }
